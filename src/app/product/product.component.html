@@ -1,0 +1,36 @@
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  
+  <h2>Product List</h2>
+  <ul>
+    <li *ngFor="let product of products">
+      {{ product.name }} - ${{ product.price }}
+      <button (click)="deleteProduct(product.id)">Delete</button>
+      <button (click)="getProductById(product.id)">View</button>
+    </li>
+  </ul>
+  
+  <h3>Add New Product</h3>
+  <form (ngSubmit)="addProduct()">
+    <div>
+      <label for="name">Name:</label>
+      <input [(ngModel)]="product.name" name="name" required />
+    </div>
+    <div>
+      <label for="price">Price:</label>
+      <input [(ngModel)]="product.price" name="price" required />
+    </div>
+    <button type="submit">Add Product</button>
+  </form>
+  
+  <h3>View Product by ID</h3>
+  <input [(ngModel)]="productId" type="number" placeholder="Enter product ID" />
+  <button (click)="getProductById(productId)">Get Product</button>
+  
+  <div *ngIf="product && product.id">
+    <h4>Product Details:</h4>
+    <p>Name: {{ product.name }}</p>
+    <p>Price: ${{ product.price }}</p>
+  </div>
+  
